@@ -37,16 +37,15 @@ const posts = [
     }
 ];
 const normalizeData = (unnormalizedData) => {
-    const bYId = {};
+    const byId = {};
     unnormalizedData.map((item) => {
         if (item.id) {
-            bYId[item.id] = item;
+            byId[item.id] = item;
         }
     });
-    const allIds = Object.keys(bYId);
     return {
-        bYId,
-        allIds
+        byId,
+        allIds: Object.keys(byId)
     };
 };
 console.log(normalizeData(posts));

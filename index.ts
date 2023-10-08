@@ -44,18 +44,16 @@ interface IById<T> {
 }
 
 const normalizeData = <T extends IObj>(unnormalizedData: T[]) => {
-    const bYId = {} as IById<T>;
+    const byId = {} as IById<T>;
     unnormalizedData.map((item) => {
         if (item.id) {
-            bYId[item.id] = item;
+            byId[item.id] = item;
         }
     })
 
-    const allIds = Object.keys(bYId);
-
     return {
-        bYId,
-        allIds
+        byId,
+        allIds: Object.keys(byId)
     };
 };
 
