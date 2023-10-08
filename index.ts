@@ -5,7 +5,7 @@ interface IProps {
     months: number
 }
 
-const totalPrice = ({ price, discount, isInstallment, months }: IProps) => {
+const totalPrice = ({ price, discount, isInstallment, months }: IProps): void => {
     const priceWithDiscount = price - (price / 100 * discount);
     if (isInstallment) {
         console.log(priceWithDiscount / months);
