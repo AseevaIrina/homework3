@@ -37,18 +37,24 @@ const posts = [
 ];
 
 interface IObj {
-    id?: string
-}
-interface IById<T> {
-    [key: string]: T
+    id: string
 }
 
-const normalizeData = <T extends IObj>(unnormalizedData: T[]) => {
-    const byId = {} as IById<T>;
+type TId = IObj['id']
+
+interface IById {
+    [key: TId]: IObj
+}
+interface IAllIds {
+    allIds: TId[];
+}
+
+interface INormalize extends Record<'byId', IById>, IAllIds {}
+
+const normalizeData = <T extends IObj>(unnormalizedData: T[]): INormalize => {
+    const byId: IById = {};
     unnormalizedData.map((item) => {
-        if (item.id) {
-            byId[item.id] = item;
-        }
+        byId[item.id] = item;
     })
 
     return {

@@ -39,9 +39,7 @@ const posts = [
 const normalizeData = (unnormalizedData) => {
     const byId = {};
     unnormalizedData.map((item) => {
-        if (item.id) {
-            byId[item.id] = item;
-        }
+        byId[item.id] = item;
     });
     return {
         byId,
