@@ -35,9 +35,21 @@ const posts = [
         body: 'maiores sed dolores similique labore et inventore etquasi temporibus esse sunt id eteos voluptatem aliquamratione corporis molestiae mollitia quia et magnam dolor'
     }
 ];
+const posts1 = [
+    {
+        id: '11111111',
+        title: 'id labore ex et quam laborum',
+        body: 'laudantium enim quasi est quidem magnam voluptate ipsam eostempora quo necessitatibusdolor quam autem quasireiciendis et nam sapiente accusantium'
+    },
+    {
+        id: '22222222',
+        title: 'quo vero reiciendis velit similique earum',
+        body: 'est natus enim nihil est dolore omnis voluptatem numquamet omnis occaecati quod ullam at voluptatem error expedita pariaturnihil sint nostrum voluptatem reiciendis et'
+    }
+];
 
 interface IObj {
-    id: string
+    id: string | number | symbol
 }
 
 type TId = IObj['id']
@@ -64,3 +76,4 @@ const normalizeData = <T extends IObj>(unnormalizedData: T[]): INormalize => {
 };
 
 console.log(normalizeData(posts));
+console.log(normalizeData(posts1));
