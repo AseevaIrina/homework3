@@ -1,16 +1,35 @@
-interface IProps {
-    price: number
-    discount: number
-    isInstallment: boolean
-    months: number
+const COMMENTS_URL = 'https://jsonplaceholder.typicode.com/comments';
+
+interface IPost {
+    postId: number
+    id: number
+    name: string
+    email: string
+    body: string
 }
 
-const totalPrice = ({ price, discount, isInstallment, months }: IProps): void => {
-    const priceWithDiscount = price - (price / 100 * discount);
-    if (isInstallment) {
-        console.log(priceWithDiscount / months);
+type MyPost = Pick<IPost, "id" | "email">
+
+const getData = async (url: string): Promise<IPost[] | undefined> => {
+    try {
+        const response = await fetch(url);
+        if (response.ok) {
+            return response.json();
+        }
+    } catch (e) {
+        console.log(e)
     }
-    console.log(priceWithDiscount);
 }
 
-totalPrice({ price: 100000, discount: 25, isInstallment: true, months: 12 });
+getData(COMMENTS_URL)
+    .then(data => {
+        if (data) {
+            const myPost: MyPost[] = [];
+            data.map(post => {
+                myPost.push({ id: post.id, email: post.email })
+            });
+            myPost.map(post => {
+                console.log(`ID: ${post.id}, Email: ${post.email}`)
+            })
+        }
+    });
